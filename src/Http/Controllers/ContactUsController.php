@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use avsr_sts\Contactus\Models\ContactUs;
 use avsr_sts\Contactus\Mail\ContactMailable; 
-use Illuminate\Support\facades\Mail;
+use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller
 {

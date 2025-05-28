@@ -1,6 +1,6 @@
 # avsr_sts/contactus
 
-**Version**: v2.1.0  
+**Version**: v1.1.0  
 **Author**: Akhil Vijay & Sreejith P  
 **Company**: Soft and Tech Solutions  
 
@@ -25,4 +25,4 @@ To install this package, use the following steps:
 2. Publish the configuration and views:
 
    ```bash
-   php artisan vendor:publish --provider="avsrSts\ContactUs\ContactUsServiceProvider"
+   php artisan vendor:publish --provider="SoftAndTech\ContactUs\ContactUsServiceProvider"
