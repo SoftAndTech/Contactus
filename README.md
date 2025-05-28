@@ -1,6 +1,6 @@
 # avsr_sts/contactus
 
-**Version**: v1.1.0  
+**Version**: v1.1.1  
 **Author**: Akhil Vijay & Sreejith P  
 **Company**: Soft and Tech Solutions  
 
