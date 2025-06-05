@@ -1,0 +1,26 @@
+{
+    "name": "softandtech/contactus",
+    "description": "A simple Contact Us form for customer queries. This package allows users to submit inquiries or feedback via a contact form",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SoftAndTech\\Contactus\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SoftAndTech\\Contactus\\ContactusServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+             
+            "name": "SoftandTech | Akhil Vijay | Sreejith P"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
