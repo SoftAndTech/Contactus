@@ -1,4 +1,4 @@
-# avsr_sts/contactus
+# softandtech/contactus
 
 **Version**: v1.1.0  
 **Author**: Akhil Vijay & Sreejith P  
@@ -7,10 +7,10 @@
 ## Description
 A simple Contact Us form for customer queries. This package allows users to submit inquiries or feedback via a contact form. 
 
-**Important**: This package is **not public** and is **not to be used publicly**.
-
 ## Features
-- Easy to integrate Contact Us form in Laravel
+- Easy to integrate Contact Us form for Laravel users
+- Easy Integration
+- No API required
 - Sends customer queries to a specified email
 - Stores contact form data in the database
 - Customizable email content
@@ -32,8 +32,9 @@ To install this package, use the following steps:
 3. Check new folders and files are added to your 'view' foldwrs and 'public' folders
 
     ```bash 
+    
         ..views
-        |vendor
+            |vendor
                 |contactus 
 
 
