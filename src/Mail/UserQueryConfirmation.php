@@ -27,6 +27,7 @@ class UserQueryConfirmation extends Mailable
     public function build()
     {
         return $this->subject('We Received Your Query')
-                    ->view('contactus::emails.user_query_confirmation');
+                    ->view('contactus::contact.user_query_confirmation')
+                    ->with(['contactData' => $this->contactData]);
     }
 }

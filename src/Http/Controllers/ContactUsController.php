@@ -24,13 +24,17 @@ class ContactUsController extends Controller
                 'avsrContct_u_email' => 'required|email', 
                 'avsrContct_u_msg' => 'required|string',
             ]);
-        \Log::info('Contact mail sending triggered', $validated);
+         
 
-        Mail::to(config('conf_contact.send_email_to'))->send(new ContactMailable($validated));
+        Mail::to(config('conf_contact.send_email_to'))->send(new ContactMailable(
+                $validated['avsrContct_u_msg'],
+                $validated['avsrContct_u_name'],
+                $validated['avsrContct_u_email']
+        ));
         
         
         // Send confirmation to user
-        Mail::to($data['email'])->send(new UserQueryConfirmation($data));
+        Mail::to($validated['avsrContct_u_email'])->send(new UserQueryConfirmation($validated));
 
         $feeds = ContactUs::create([
         'name' => $request->avsrContct_u_name,
