@@ -1,9 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+use SoftAndTech\Contactus\Http\Controllers\ContactUsController;
+use SoftAndTech\Contactus\Http\Controllers\ContactUsSettingsController;
 
-Route::group(['namespace'=>'avsr_sts\Contactus\Http\Controllers'], function () {
-    Route::get('contactus', 'ContactUsController@index')->name('contactus');
-    Route::post('contactus', 'ContactUsController@send');
+// Public-facing contact form
+Route::get('/contactus', [ContactUsController::class, 'index'])->name('contactus');
+Route::post('/contactus', [ContactUsController::class, 'send'])->name('contactus.send');
+
+// Admin settings (consider middleware for auth)
+Route::middleware(['web'])->group(function () {
+    Route::get('/contactus/settings', [ContactUsSettingsController::class, 'index'])->name('contactus.settings');
+    Route::post('/contactus/settings/update', [ContactUsSettingsController::class, 'update'])->name('contactus.settings.update');
 });
