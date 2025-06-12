@@ -37,23 +37,8 @@ To install this package, use the following steps:
         ..views
             |vendor
                 |contactus 
-
-
-4. Include the contact form wherwever you want
-
-    ```php
-        @include('contactus::contact')
-
-
-5. Update the 'app/config/conf_contact.php' with your mail id and details
-
-    ```php
-        return [
-            'send_email_to'=>'your-mail.com',
-            'sender_name'=>'your-senders_name'
-        ];
     
-6. update your env files 
+4. update your env files 
     ```bash
         MAIL_MAILER=smtp
         MAIL_HOST=smtp.gmail.com
@@ -64,7 +49,7 @@ To install this package, use the following steps:
         MAIL_FROM_ADDRESS="your@mail.com"
         MAIL_FROM_NAME="${APP_NAME}"
 
-7. Clear config and cache ,view and route
+5. Clear config and cache ,view and route
 
     ```bash
         php artisan config:clear
@@ -72,3 +57,19 @@ To install this package, use the following steps:
         php artisan view:clear
         php artisan optimize
         php artisan route:clear
+
+6. Navigate links
+
+    ```bash
+        yourdomain.com/contactus_settings  // for settings
+        yourdomain.com/contact_us  // for contact us form if you want to run the form directly
+
+    or
+    
+    Include the contact form wherwever you want
+
+    ```php
+        @include('contactus::contact')
+
+7. If you want to add 'auth' requirements, just wrap the middleware to the routes in
+        Contactus\vendor\softandtech\contactus\src\routes\web.php
