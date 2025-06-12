@@ -3,10 +3,10 @@
 **Version**: v2.0.0  
 **Author**: Akhil Vijay & Sreejith P  
 **Company**: Soft and Tech Solutions  
-
+**License**: MIT
 
 ## Description
-A simple Contact Us form for customer queries. This package allows users to submit inquiries or feedback via a contact form. 
+A simple Contact Us form for customer queries. This package allows users to submit inquiries or feedback via a contact form. Additionally we provide a configuration page to customize the mail template. Additionally contact_conf is now depretiated
 
 ## Features
 - Easy to integrate Contact Us form for Laravel users
@@ -38,7 +38,8 @@ To install this package, use the following steps:
             |vendor
                 |contactus 
     
-4. update your env files 
+4. update your `env` files 
+
     ```bash
         MAIL_MAILER=smtp
         MAIL_HOST=smtp.gmail.com
@@ -49,7 +50,25 @@ To install this package, use the following steps:
         MAIL_FROM_ADDRESS="your@mail.com"
         MAIL_FROM_NAME="${APP_NAME}"
 
-5. Clear config and cache ,view and route
+5. Navigate links
+
+    ```bash
+        yourdomain.com/contactus_settings  // for settings
+        yourdomain.com/contact_us  // for contact us form if you want to run the form directly
+
+    or
+    
+    Include the contact form wherwever you want.
+
+    ```php
+        @include('contactus::contact')
+6. Run migration
+     This package requires 2 tables. One for configuration and other for saving customer's contact data.
+
+    ```bash
+       php artisan migrate
+
+7. Clear config and cache ,view and route
 
     ```bash
         php artisan config:clear
@@ -58,18 +77,10 @@ To install this package, use the following steps:
         php artisan optimize
         php artisan route:clear
 
-6. Navigate links
 
-    ```bash
-        yourdomain.com/contactus_settings  // for settings
-        yourdomain.com/contact_us  // for contact us form if you want to run the form directly
-
-    or
+8. Initilize settings
     
-    Include the contact form wherwever you want
+    From your browser, go to 'yourdomain.com/contactus_settings' and save your configuratrion before running the contact us form.
 
-    ```php
-        @include('contactus::contact')
-
-7. If you want to add 'auth' requirements, just wrap the middleware to the routes in
+9. If you want to add 'auth' requirements, just wrap the middleware to the routes in
         Contactus\vendor\softandtech\contactus\src\routes\web.php
