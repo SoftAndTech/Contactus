@@ -1,4 +1,4 @@
-# avsr_sts/contactus
+# SoftAndTech\Contactus
 
 **Version**: v2.0.0  
 **Author**: Akhil Vijay & Sreejith P  
