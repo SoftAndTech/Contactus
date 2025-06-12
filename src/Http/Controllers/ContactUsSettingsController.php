@@ -10,6 +10,7 @@ use SoftAndTech\Contactus\Mail\ContactMailable;
 use SoftAndTech\Contactus\Mail\UserQueryConfirmation;
 use Illuminate\Support\Facades\Mail;
 use SoftAndTech\Contactus\Helpers\ContactusHelper;
+use SoftAndTech\Contactus\Http\Requests\ContactUsSettingsRequest;
 
 class ContactUsSettingsController extends Controller
 {
@@ -23,26 +24,17 @@ class ContactUsSettingsController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(ContactUsSettingsRequest $request)
     {
         try {
-            $request->validate([
-            'send_email_to' => 'required|email',
-            'sender_name' => 'required|string|max:255',
-            'admin_message' => 'nullable|string',
-            'user_ack_message' => 'nullable|string',
-            'website_title' => 'nullable|string|max:255',
-            'website_link' => 'nullable|url',
-            'icon' => 'nullable|image|max:2048',
-            'contact_number' => 'nullable|in:yes,no',
-            'display_title' => 'nullable|in:yes,no',
-            'display_icon' => 'nullable|in:yes,no',
-            ]);
+             
 
             $settings = $request->except(['_token', 'icon']);
 
             foreach ($settings as $key => $value) {
-            ContactusSetting::set($key, $value);
+                if (!is_array($value)) {
+                    ContactusSetting::set($key, $value);
+                }
             }
 
             // Handle icon upload
@@ -66,11 +58,7 @@ class ContactUsSettingsController extends Controller
             }
 
             return redirect()->back()->with('success', 'Settings updated successfully!');
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return redirect()->back()
-            ->withErrors($e->validator)
-            ->withInput();
-        } catch (\Exception $e) {
+        }  catch (\Exception $e) {
             return redirect()->back()
             ->with('error', 'An error occurred while updating settings: ' . $e->getMessage())
             ->withInput();

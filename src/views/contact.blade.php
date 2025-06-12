@@ -16,11 +16,9 @@
 </head>
 <body>
     @php 
-            use SoftAndTech\Contactus\Helper\ContactusHelper; 
-            $contactusSettings = \SoftAndTech\Contactus\Helper\ContactusHelper::getAll();
-                $iconPath = ContactusHelper::get('icon');
-                $iconUrl = $iconPath ? asset($iconPath) : null;
-        @endphp
+        use SoftAndTech\Contactus\Helper\ContactusHelper; 
+        $contactusSettings = \SoftAndTech\Contactus\Helper\ContactusHelper::getAll(); 
+    @endphp
     <div class="form-container">
         <div class="contactMessage" style="display:none;">
             <p id="avsr_loading">Please wait..</p>

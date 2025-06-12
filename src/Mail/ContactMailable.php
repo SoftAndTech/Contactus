@@ -18,15 +18,17 @@ class ContactMailable extends Mailable
     public $userMessage;
     public $name;
     public $email;
+    public string $userContact;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($message, $name, $email)
+    public function __construct(array $userQuery)
     {
-        $this->userMessage = $message;
-        $this->name = $name;
-        $this->email = $email;
+        $this->userMessage = $userQuery['avsrContct_u_msg'] ?? '';
+        $this->name = $userQuery['avsrContct_u_name'] ?? '';
+        $this->email = $userQuery['avsrContct_u_email'] ?? '';
+        $this->userContact = $userQuery['avsrContct_u_phone'] ?? '';
     }
 
     /**
@@ -47,7 +49,7 @@ class ContactMailable extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'contactus::contact.email', // Or use `view:` if not using markdown
+            view: 'contactus::contact.email', // Or use `view:` if not using markdown
             with: [
                 'userMessage' => $this->userMessage,
                 'name' => $this->name,

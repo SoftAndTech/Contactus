@@ -16,6 +16,7 @@ class UserQueryConfirmation extends Mailable
 
     public string $name;
     public string $email;
+    public string $userContact;
     public string $userMessage;
 
     /**
@@ -26,6 +27,7 @@ class UserQueryConfirmation extends Mailable
         $this->name = $userQuery['avsrContct_u_name'] ?? '';
         $this->email = $userQuery['avsrContct_u_email'] ?? '';
         $this->userMessage = $userQuery['avsrContct_u_msg'] ?? '';
+        $this->userContact = $userQuery['avsrContct_u_phone'] ?? '';
     }
 
     /**

@@ -35,11 +35,11 @@
             <h2 class="admin-message-preview" style="color: #2d3748; margin-bottom: 25px;">{{ ContactusHelper::get('admin_message') ?? 'You have a mail from' }}</h2>
             
             <div style="margin-bottom: 20px;">
-                <h5 style="color: #4a5568;">Contact Details</h5>
+                <h3 style="color: #4a5568;">Contact Details</h3>
                 <p class="admin-name-preview"><strong>Name:</strong>  {{ $name }}</p>
                 <p class="admin-email-preview"><strong>Email:</strong> {{ $email }}</p>
                 @if(ContactusHelper::get('contact_number') === 'yes' )
-                <p class="admin-phone-preview"><strong>Phone:</strong> {{ $phone }}</p>
+                <p class="admin-phone-preview"><strong>Phone:</strong> {{ $userContact }}</p>
                 @endif 
             </div>
             
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <div style="text-align: center;">
+            <div style="text-align: center;  margin-bottom: 2em;">
                 <a href="mailto:{{ $email }}" class="admin-reply-link-preview" style="background-color: #2563eb; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">
                     Reply to {{ $name }}
                 </a>
