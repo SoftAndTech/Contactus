@@ -20,11 +20,11 @@ class UserQueryConfirmation extends Mailable
     public function build()
     {
         return $this->subject('We Received Your Query')
-                    ->view('contactus::contact.user_query_confirmation')
-                    ->with([
-                        'name'    => $this->userQuery['name'] ?? '',
-                        'email'   => $this->userQuery['email'] ?? '',
-                        'message' => $this->userQuery['message'] ?? '',
-                    ]);
+            ->view('contactus::contact.user_query_confirmation')
+            ->with([
+                'name'    => $this->userQuery['name'] ?? '',
+                'email'   => $this->userQuery['email'] ?? '',
+                'userMessage' => $this->userQuery['message'] ?? '',
+            ]);
     }
 }

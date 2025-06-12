@@ -5,8 +5,8 @@ use SoftAndTech\Contactus\Http\Controllers\ContactUsController;
 use SoftAndTech\Contactus\Http\Controllers\ContactUsSettingsController;
 
 // Public-facing contact form
-Route::get('/contactus', [ContactUsController::class, 'index'])->name('contactus');
-Route::post('/contactus', [ContactUsController::class, 'send'])->name('contactus.send');
+Route::get('contact_us', [ContactUsController::class, 'index'])->name('contactus');
+Route::post('contact_us', [ContactUsController::class, 'send'])->name('contactus.send');
 
 // Admin settings (consider middleware for auth)
 Route::middleware(['web'])->group(function () {

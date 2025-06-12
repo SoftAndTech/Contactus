@@ -15,6 +15,12 @@
      
 </head>
 <body>
+    @php 
+            use SoftAndTech\Contactus\Helper\ContactusHelper; 
+            $contactusSettings = \SoftAndTech\Contactus\Helper\ContactusHelper::getAll();
+                $iconPath = ContactusHelper::get('icon');
+                $iconUrl = $iconPath ? asset($iconPath) : null;
+        @endphp
     <div class="form-container">
         <div class="contactMessage" style="display:none;">
             <p id="avsr_loading">Please wait..</p>
@@ -32,6 +38,12 @@
                 <label for="avsrContct_u_email">Email address</label>
                 <input type="email" class="form-control" id="avsrContct_u_email" name="avsrContct_u_email" required>
             </div>
+            @if( ContactusHelper::get('contact_number') === 'yes')
+                <div class="form-group">
+                    <label for="avsrContct_u_email">Contact number</label><small>With country code</small>
+                    <input type="text" class="form-control" id="avsrContct_u_phone" name="avsrContct_u_phone" placeholder="+91-96.." required>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="avsrContct_u_msg">Message</label>
                 <textarea class="form-control" id="avsrContct_u_msg" name="avsrContct_u_msg" rows="5" required></textarea>

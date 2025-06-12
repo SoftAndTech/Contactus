@@ -4,8 +4,10 @@ namespace SoftAndTech\Contactus\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use avsr_sts\Contactus\Models\ContactUs;
-use avsr_sts\Contactus\Mail\ContactMailable; 
+use SoftAndTech\Contactus\Models\ContactUs;
+use SoftAndTech\Contactus\Models\ContactUsSetting;
+use SoftAndTech\Contactus\Mail\UserQueryConfirmation;
+use SoftAndTech\Contactus\Mail\ContactMailable; 
 use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller

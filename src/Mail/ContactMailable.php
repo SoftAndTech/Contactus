@@ -11,12 +11,12 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use SoftAndTech\Contactus\Mail;
 use Illuminate\Mail\Markdown;
-
+use SoftAndTech\Contactus\Helper\ContactusHelper; 
 
 class ContactMailable extends Mailable
 {
     use Queueable, SerializesModels;
-    public $message;
+    public $userMessage;
     public $name;
     public $email;
     /**
@@ -24,19 +24,19 @@ class ContactMailable extends Mailable
      */
     public function __construct($message, $name, $email)
     {
-        $this->message = $message;
+        $this->userMessage = $message;
         $this->name = $name;
         $this->email = $email;
     }
 
     /**
      * Get the message envelope.
-     */
+     */ 
     public function envelope(): Envelope
     {
         return new Envelope(
             // from: new Address($this->email, $this->name),
-            from: new Address(config('conf_contact.send_email_to'), config('conf_contact.sender_name')),
+            from: new Address(ContactusHelper::get('send_email_to'), ContactusHelper::get('sender_name')),
             replyTo: [
                 new Address($this->email, $this->name),
             ],
@@ -55,22 +55,16 @@ class ContactMailable extends Mailable
     // }
     public function build()
     {
-         
-        return $this->markdown('contactus::contact.email') 
-        ->with([
-            'message' => $this->message,
-            'name' => $this->name
-        ]);
-
-        // return $this->from($this->email, $this->name)
-        //             ->subject($this->name . ' had a query')
-        //             ->markdown('contactus::contact.email')
-        //             ->with([
-        //                 'message' => $this->message,
-        //                 'name' => $this->name,
-        //                 'email' => $this->email
-        //             ]);
+        return $this->from(ContactusHelper::get('send_email_to'), ContactusHelper::get('sender_name'))
+                    ->replyTo($this->email, $this->name)
+                    ->subject($this->name . ' had a query')
+                    ->markdown('contactus::contact.email')
+                    ->with([
+                        'userMessage' => $this->userMessage,
+                        'name' => $this->name,
+                    ]);
     }
+
 
     /**
      * Get the attachments for the message.

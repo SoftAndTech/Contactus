@@ -15,7 +15,9 @@
 <body>
     @php 
         use SoftAndTech\Contactus\Helper\ContactusHelper; 
-        $iconPath = ContactusHelper::get('icon');
+        $contactusSettings = \SoftAndTech\Contactus\Helper\ContactusHelper::getAll();
+            $iconPath = ContactusHelper::get('icon');
+            $iconUrl = $iconPath ? asset($iconPath) : null;
     @endphp
     <div class="container-fluid my-4 mx-auto py-2 px-4">
         <div class="row">
@@ -77,7 +79,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Choose Icon</label>
-                                    <input type="file" name="icon" class="form-control">
+                                    <input type="file" name="icon" class="form-control" value="{{ old('icon', ContactusHelper::get('icon') ?? '') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -237,20 +239,17 @@
                     </div>
                     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; padding: 10px;">
                         <div style="background-color: #f8f9fa; padding: 30px; border-radius: 8px;">
-                            <div class="admin-icon-preview" style="text-align:center;margin-bottom:20px;"> 
-                                @if(!empty(ContactusHelper::get('icon')))
+                            <div class="admin-icon-preview d-flex align-items-center" style="text-align:center;margin-bottom:20px;"> 
+                                @if($iconPath)
+                                    <img src="{{ $iconUrl }}"  style="background: #f2f2f2; max-height:60px;border: 1px solid gray;padding: 2px;font-size: 12px;" alt="Website Icon">
                                 
-                                    <img src="{{ $iconPath ?? '' }}" alt="Website Icon" style="max-width:60px;max-height:60px;">
-
-                                @else
-                                    <img src="" alt="Website Icon" style="max-width:60px;max-height:60px;">
-                                @endif
+                                @endif 
+                                <h3 class="admin-title-preview" style="text-align:center;color:#181f25;margin-left:20px; font-w">
+                                    {{ ContactusHelper::get('website_title') ?? 'Website Title' }}
+                                </h3>
                             </div> 
-                            <h3 class="admin-title-preview" style="text-align:center;color:#181f25;margin-bottom:20px;">
-                                website title
-                            </h3>
                             <hr>
-                            <h2 class="admin-message-preview" style="color: #2d3748; margin-bottom: 25px;">You've received a new message</h2>
+                            <h2 class="admin-message-preview" style="color: #2d3748; margin-bottom: 25px;">{{ ContactusHelper::get('admin_message') ?? 'You have amail from' }}</h2>
                             
                             <div style="margin-bottom: 20px;">
                                 <h5 style="color: #4a5568;">Contact Details</h5>
@@ -278,7 +277,8 @@
                             <div style="margin-top: 30px; text-align: center; font-size: 12px; color: #718096;">
                                 <p class="admin-footer-appname-preview">This email was sent from the contact form on {{ config('app.name') }}</p>
                                 <p class="admin-footer-meta-preview" >
-                                <strong class="user-title-footer">{{ ContactusHelper::get('website_title') }}</strong> | <span class="s_mail muted">{{ ContactusHelper::get('send_email_to') }}</span>
+                                <a href="{{ ContactusHelper::get('website_url') }}" style="text-decoration: none; color: #2563eb;">
+                                    <strong class="user-title-footer">{{ ContactusHelper::get('website_title') }}</strong> </a> | <span class="s_mail muted">{{ ContactusHelper::get('send_email_to') }}</span>
                                 </p>
                                 <p class="admin-footer-date-preview">{{ now()->format('F j, Y \a\t g:i A') }}</p>
                             </div>
@@ -295,16 +295,14 @@
                             </div>
                             <div style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;max-width:600px;margin:0 auto;padding:10px">
                                 <div style="background-color:#f8f9fa;padding:30px;border-radius:8px">
-                                    <div class="user-icon-preview" style="text-align:center;margin-bottom:20px;">
-                                        @if(!empty(ContactusHelper::get('icon')))
-                                            <img src="{{ asset('/' . ContactusHelper::get('icon')) }}" alt="Website Icon" style="max-width:60px;max-height:60px;">
-                                        @else
-                                            <img src="" alt="Website Icon" style="max-width:60px;max-height:60px;">
-                                        @endif
-                                    </div>  
-                                    <h3 class="user-title-preview" style="text-align:center;color:#181f25;margin-bottom:20px;">
-                                        Website title
-                                    </h3>
+                                    <div class="admin-icon-preview d-flex align-items-center" style="text-align:center;margin-bottom:20px;"> 
+                                        @if($iconPath)
+                                            <img src="{{ $iconUrl }}"  style="background: #f2f2f2; max-height:60px;border: 1px solid gray;padding: 2px;font-size: 12px;" alt="Website Icon">
+                                        @endif 
+                                        <h3 class="admin-title-preview" style="text-align:center;color:#181f25;margin-left:20px; font-w">
+                                            {{ ContactusHelper::get('website_title') ?? 'Website Title' }}
+                                        </h3>
+                                    </div> 
                                     <hr>
                                     <h2 style="color:#2d3748;margin-bottom:25px">Hi John Piper,</h2>
                                     <br>
@@ -323,7 +321,8 @@
                                     <div style="margin-top:30px;text-align:center;font-size:12px;color:#718096">
                                         <p>This email was sent from the contact form on Laravel</p>
                                         <p class="admin-footer-meta-preview" >
-                                            <strong class="user-title-footer">{{ ContactusHelper::get('website_title') }}</strong> | <span class="s_mail muted">{{ ContactusHelper::get('send_email_to') }}</span>
+                                        <a href="{{ ContactusHelper::get('website_url') }}" style="text-decoration: none; color: #2563eb;">
+                                            <strong class="user-title-footer">{{ ContactusHelper::get('website_title') }}</strong> </a> | <span class="s_mail muted">{{ ContactusHelper::get('send_email_to') }}</span>
                                         </p>
                                         <p class="admin-footer-date-preview">{{ now()->format('F j, Y \a\t g:i A') }}</p> 
                                     </div>
@@ -340,7 +339,7 @@
     $(document).ready(function() {
         // Helper to get settings from PHP
         const settings = @json($contactusSettings ?? []);
-
+console.log(settings);
         // Set initial preview values
         class ContactusPreview {
             constructor(settings) {
